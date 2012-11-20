@@ -31,13 +31,13 @@ class django {
     }
 
     class {'django::package': }
-
+    class {'django::pil': }
 
     # Allow the end user to establish relationships to the "main" class
     # and preserve the relationship to the implementation classes through
     # a transitive relationship to the composite class.
     anchor{ 'django::begin':
-        before => Class['django::package'],
+        before => [Class['django::package'], Class['django::pil']]
         #notify => Class['django::service'],
       }
 
